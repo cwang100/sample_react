@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Button from './components/button.js';
+import Button from './components/Button.js';
 
 class App extends Component {
   render() {
@@ -15,8 +15,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        //<Button name="123" onClick={onButtonClick}/>
+
         <button onClick={onButtonClick}>click me</button>
+        
         <p>{text}</p>
       </div>
     );
