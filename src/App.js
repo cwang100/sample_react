@@ -8,19 +8,46 @@ import Table from './components/Table.js';
 import TableData from './components/TableData.js';
 import TableHead from './components/TableHead.js';
 import TableRow from './components/TableRow.js';
+import Modal from './components/Modal.js';
 import { connect } from 'react-redux';
 import { getData } from './actions/SampleActions.js';
+import { getEventData } from './actions/SampleActions.js';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { isOpen: false, displayEventDetails: {} };
+  }
+
+  toggleModal = (id) => {
+    console.log(id)
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+
+    if (id > 0 ) {
+    this.setState({
+      displayEventDetails: this.props.text[id]['full_slug'] //Todo: change it to more comprehensive event details
+    });
+      console.log(this.props.text[id]['full_slug'])
+    }
+  }
+
   render() {
     let tableContent = [];
-    const {text, events, onButtonClick} = this.props;
+    const {text, events, onButtonClick, DisplayModal} = this.props;
     _.each(text, (value) => {
-        let tableRow = <tableData>value</tableData>;
-        console.log(tableRow);
-        tableContent.push(value.description);
+      //console.log(value);
+      let EventID = <TableData>{value.id}</TableData>;
+      let EventType = <TableData>{value.event_type}</TableData>;
+      let EventDesc = <TableData>{value.description}</TableData>;
+      //let EventDetail = <TableData><Button onClick={DisplayModal} name={"View Details"} id={value.id}/></TableData>;
+      let EventDetail = <TableData><Button onClick={() => this.toggleModal(value.id)} name={"View Details"} id={value.id}/></TableData>;
+
+      tableContent.push(<TableRow key={value.id}>{EventID}{EventType}{EventDesc}{EventDetail}</TableRow>);
     });
-    console.log(tableContent);
+
     return (
       <div className="App">
         <header className="App-header">
@@ -28,8 +55,21 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
 
-        <Button onClick={onButtonClick} name={"click me"}/>
-        <Table><TableRow>{tableContent}</TableRow></Table>
+        <Button onClick={onButtonClick} name={"Show All Events"} size="L"/>
+        <Table>
+          <TableRow>
+            <TableHead>Event ID</TableHead>
+            <TableHead>Event Type</TableHead>
+            <TableHead>Event Description</TableHead>
+            <TableHead></TableHead>
+          </TableRow>
+          {tableContent}
+        </Table>
+
+        <Modal show={this.state.isOpen}
+          onClose={this.toggleModal}>
+          {this.state.displayEventDetails}
+        </Modal>
       </div>
     );
   }
@@ -41,7 +81,8 @@ function mapStateToProps(state) {
  
 function mapDispatchToProps(dispatch){  
     return {  
-      onButtonClick:()=>dispatch(getData)
+      onButtonClick:()=>dispatch(getData),
+      DisplayModal:()=>dispatch(getEventData)
     }  
 }  
 

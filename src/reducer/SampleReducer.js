@@ -1,26 +1,25 @@
 import _ from 'lodash'
 
 const initialState = {  
-    text: 'Hello',
-    events: [] 
+    text: '',
+    events: [],
+    eventDetails: ''
 } 
 export const reducer = (state = initialState, action) => {  
     switch (action.type) {   
         case 'BUTTON_CLICK': 
-        	console.log('button clicked')
         	let fullData = action.data;
         	let eventIds = fullData.event_ids;
 
 
-		    	return {
+		    return {
 		        text: fullData.events,
-		        events: eventIds
+		        eventDetails: eventIds
 		      };
 
-		    case 'CLICK_INTO_EVENT':
-
-		    return {
-		    	text: action.data
+		case 'CLICK_INTO_EVENT':
+        	return {
+		    	eventDetails: action.data
 		    };
             
         default:  
