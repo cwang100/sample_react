@@ -1,23 +1,13 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import SampleReducer from './reducer/SampleReducer.js';
 
-function counter(state = 0, action) {
-  switch (action.type) {
-  case 'INCREMENT':
-    return state + 1;
-  case 'DECREMENT':
-    return state - 1;
-  default:
-    return state;
-  }
-}
-
-let store = createStore(counter);
+let store = createStore(SampleReducer);
 
 ReactDOM.render(
   <Provider store={store}>
