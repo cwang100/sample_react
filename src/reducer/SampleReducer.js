@@ -14,7 +14,7 @@ export const reducer = (state = initialState, action) => {
 
 		    return {
 		        text: fullData.events,
-		        eventDetails: eventIds
+		        events: eventIds
 		      };
 
 		case 'CLICK_INTO_EVENT':
