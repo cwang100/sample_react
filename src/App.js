@@ -18,7 +18,7 @@ class App extends Component {
 
         <Button onClick={onButtonClick} name={"click me"}/>
 
-        <p>{text}</p>
+        <p>{JSON.stringify(text)}</p>
       </div>
     );
   }
