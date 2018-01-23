@@ -16,8 +16,8 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 
-        <button onClick={onButtonClick}>click me</button>
-        
+        <Button onClick={onButtonClick} name={"click me"}/>
+
         <p>{text}</p>
       </div>
     );
