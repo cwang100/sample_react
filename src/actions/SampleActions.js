@@ -1,7 +1,5 @@
 import $ from "jquery";
 
-import Modal from '../components/Modal.js';
-
 export const getData = function(dispatch, getState){
 		console.log(getState());
 		return $.ajax({
