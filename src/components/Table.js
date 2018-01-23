@@ -6,7 +6,9 @@ class Table extends Component {
       <table 
         className="table table-striped"       
       >
+      	<tbody>
         { this.props.children }
+        </tbody>
       </table>
     );
   }

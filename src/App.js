@@ -1,14 +1,24 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Button from './components/Button.js';
 import TextBox from './components/TextBox.js';
+import Table from './components/Table.js';
+import TableData from './components/TableData.js';
+import TableHead from './components/TableHead.js';
+import TableRow from './components/TableRow.js';
 import { connect } from 'react-redux';
-import {getData} from './actions/SampleActions.js';
+import { getData } from './actions/SampleActions.js';
 
 class App extends Component {
   render() {
-    const {text, onButtonClick} = this.props;
+    let tableContent = [];
+    const {text, events, onButtonClick} = this.props;
+    _.each(text, (value) => {
+        tableContent.push(value.description);
+    });
+    console.log(tableContent);
     return (
       <div className="App">
         <header className="App-header">
@@ -17,15 +27,14 @@ class App extends Component {
         </header>
 
         <Button onClick={onButtonClick} name={"click me"}/>
-
-        <TextBox>{JSON.stringify(text)}</TextBox>
+        <Table><TableRow>{events}</TableRow></Table>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {  
-    return { text: state.text }  
+    return { text: state.text, events: state.events }  
 }  
  
 function mapDispatchToProps(dispatch){  
