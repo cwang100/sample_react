@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+
+//usage: <StaffItemPanel items={rawData} />
 class Table extends Component {
 	constructor(props) {
     super(props);
@@ -9,11 +11,11 @@ class Table extends Component {
   let items = [];
 
 
-  this.props.items.forEach(item => {
-          items.push(<StaffItem key={item.key} item={item}/>);
+  this.props.header.forEach(head => {
+          items.push(<TableItem key={item.key} item={item}/>);
       });
   if(this.props.items.length == 0) {
-      items.push(<tr><th colSpan="5" className="tempEmpty">Nothing to show</th></tr>);
+      items.push(<tr><th colSpan=this.props.header.length className="tempEmpty">Nothing to show</th></tr>);
   }else {
       this.props.items.forEach(item => {
           items.push(<StaffItem key={item.key} item={item}/>);
