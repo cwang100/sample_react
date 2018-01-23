@@ -1,10 +1,16 @@
-export default function SampleReducer(state = 0, action) {
-  switch (action.type) {
-  case 'INCREMENT':
-    return state + 1;
-  case 'DECREMENT':
-    return state - 1;
-  default:
-    return state;
-  }
-}
+const initialState = {  
+    text: 'Hello'  
+} 
+export const reducer = (state = initialState, action) => {  
+	console.log(action.type)
+    switch (action.type) {   
+        case 'BUTTON_CLICK': 
+        	console.log('button clicked')
+		    return {
+		        text: action.data
+		      };
+            
+        default:  
+            return initialState;  
+    }  
+}  
