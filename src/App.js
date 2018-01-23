@@ -5,6 +5,7 @@ import Button from './components/button.js';
 
 class App extends Component {
   render() {
+    const {text, onButtonClick} = this.props;
     return (
       <div className="App">
         <header className="App-header">
@@ -14,7 +15,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Button name="123"/>
+        //<Button name="123" onClick={onButtonClick}/>
+        <button onClick={onButtonClick}>click me</button>
+        <p>{text}</p>
       </div>
     );
   }
