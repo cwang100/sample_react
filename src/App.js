@@ -16,6 +16,8 @@ class App extends Component {
     let tableContent = [];
     const {text, events, onButtonClick} = this.props;
     _.each(text, (value) => {
+        let tableRow = <tableData>value</tableData>;
+        console.log(tableRow);
         tableContent.push(value.description);
     });
     console.log(tableContent);
@@ -27,7 +29,7 @@ class App extends Component {
         </header>
 
         <Button onClick={onButtonClick} name={"click me"}/>
-        <Table><TableRow>{events}</TableRow></Table>
+        <Table><TableRow>{tableContent}</TableRow></Table>
       </div>
     );
   }
