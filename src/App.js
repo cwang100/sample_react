@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Button from './components/Button.js';
+import TextBox from './components/TextBox.js';
+import { connect } from 'react-redux';
+import {getData} from './actions/SampleActions.js';
 
 class App extends Component {
   render() {
@@ -12,16 +15,25 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
 
         <Button onClick={onButtonClick} name={"click me"}/>
 
-        <p>{JSON.stringify(text)}</p>
+        <TextBox>{JSON.stringify(text)}</TextBox>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {  
+    return { text: state.text }  
+}  
+ 
+function mapDispatchToProps(dispatch){  
+    return {  
+      onButtonClick:()=>dispatch(getData)
+    }  
+}  
+
+var App1 = connect(mapStateToProps, mapDispatchToProps)(App) 
+
+export default App1;
