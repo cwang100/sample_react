@@ -12,7 +12,6 @@ import TableRow from './components/TableRow.js';
 import TextBox from './components/TextBox.js';
 import Modal from './components/Modal.js';
 import Select from './components/Select.js';
-import Option from './components/Option.js';
 import { connect } from 'react-redux';
 import { getEvents, getEventDetailData } from './actions/SampleActions.js';
 
@@ -49,6 +48,20 @@ class App extends Component {
       tableContent.push(<TableRow key={value.id}>{eventID}{eventType}{eventName}{eventDetail}</TableRow>);
     });
 
+    let options = [
+      {value: "horse-racing", name: "Horse Racing"},
+      {value: "football", name: "Football"},
+      {value: "tennis", name: "Tennis"},
+      {value: "american-football", name: "American Football"},
+      {value: "basketball", name: "Basketball"},
+      {value: "boxing", name: "Boxing"},
+      {value: "cricket", name: "Cricket"},
+      {value: "golf", name: "Golf"},
+      {value: "ice-hockey", name: "Ice Hockey"},
+      {value: "snooker", name: "Snooker"},
+      {value: "volleyball", name: "Volleyball"}
+    ]
+
     return (
       <div className="App">
         <header className="App-header">
@@ -58,7 +71,7 @@ class App extends Component {
         <p>if the table is not diplaying, please install Chrome plugin</p>
         <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">allow-control-allow-origin</a>
         <Container>
-          <Button onClick={onButtonClick} name={"Show All Events"} size="L"/>
+          <Select options={options} onChange={this.props.onButtonClick}/>
         </Container>
         <Container>
           <Table>
