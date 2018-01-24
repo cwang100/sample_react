@@ -1,28 +1,31 @@
 import _ from 'lodash'
 
 const initialState = {  
-    text: '',
+    text: {},
     events: [],
     eventDetails: ''
 } 
-export const reducer = (state = initialState, action) => {  
+
+export const reducer = (state = initialState, action) => {
+    let newState = initialState;
     switch (action.type) {   
         case 'BUTTON_CLICK': 
         	let fullData = action.data;
         	let eventIds = fullData.event_ids;
-
-
-		    return {
-		        text: fullData.events,
-		        events: eventIds
-		      };
+            newState = _.assign({}, initialState, {
+                text: fullData.events,
+                events: eventIds
+            });
+            
+		    return newState;
 
 		case 'CLICK_INTO_EVENT':
-        	return {
-		    	eventDetails: action.data
-		    };
+            newState = _.assign({}, initialState, {
+                eventDetails: action.data
+            });
+        	return newState;
             
         default:  
-            return initialState;  
+            return newState;  
     }  
 }  

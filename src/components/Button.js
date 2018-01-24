@@ -5,7 +5,7 @@ class Button extends Component {
     return (
       <button 
 	      className={"btn btn-block btn-success " + (this.props.size === "L"? "btn-lg" : "")}
-        id={ this.props.id }     
+          id={ this.props.id }     
 	      disabled={ this.props.disabled }
 	      onClick={ this.props.onClick }
       >

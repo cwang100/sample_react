@@ -1,8 +1,7 @@
 import $ from "jquery";
 
-export const getData = function(dispatch, getState){
-		console.log(getState());
-		return $.ajax({
+export const getData = function(dispatch, getState) {
+	return $.ajax({
         url: 'https://smarkets.com/v0/listings/slug/sport/horse-racing/?period=upcoming',
         method: 'GET'
     }).done(data => {
@@ -10,7 +9,9 @@ export const getData = function(dispatch, getState){
     })
 }
 
-export const getEventData = function(dispatch, getState){
+export const getEventData = function(dispatch, getState) {
+	let state = getState();
+	console.log(state);
     return $.ajax({
         url: 'https://smarkets.com/v0/listings/slug/sport/horse-racing/?period=upcoming',
         method: 'GET'
