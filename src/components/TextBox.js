@@ -6,8 +6,8 @@ class TextBox extends Component {
     	<div 
 	    	className="card mb-4 box-shadow"
     	>
-        { this.props.children }
-      </div>
+        	{ this.props.children }
+      	</div>
     );
   }
 }
