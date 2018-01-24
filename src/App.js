@@ -11,6 +11,8 @@ import TableHead from './components/TableHead.js';
 import TableRow from './components/TableRow.js';
 import TextBox from './components/TextBox.js';
 import Modal from './components/Modal.js';
+import Select from './components/Select.js';
+import Option from './components/Option.js';
 import { connect } from 'react-redux';
 import { getData } from './actions/SampleActions.js';
 import { getEventData } from './actions/SampleActions.js';
