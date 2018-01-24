@@ -14,8 +14,7 @@ import Modal from './components/Modal.js';
 import Select from './components/Select.js';
 import Option from './components/Option.js';
 import { connect } from 'react-redux';
-import { getData } from './actions/SampleActions.js';
-import { getEventData } from './actions/SampleActions.js';
+import { getEvents, getEventDetailData } from './actions/SampleActions.js';
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +31,10 @@ class App extends Component {
     this.setState({
       displayEventDetails: <DetailModal details={details}/> //Todo: change it to more comprehensive event details
     });
+  }
+
+  componentWillMount() {
+    this.props.onButtonClick('horse-racing');
   }
 
   render() {
@@ -81,14 +84,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {  
-    return { text: state.text, eventDetails: state.eventDetails }  
+  return { text: state.text, eventDetails: state.eventDetails }  
 }  
  
-const mapDispatchToProps = (dispatch, ownProps) =>{  
-    return {  
-      onButtonClick:()=>dispatch(getData),
-      displayModal:()=>dispatch(getEventData)
-    }  
+const mapDispatchToProps = {  
+  onButtonClick: getEvents,
+  displayModal: getEventDetailData
 }  
 
 let ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App) 
