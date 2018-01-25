@@ -12,7 +12,6 @@ import TableRow from './components/TableRow.js';
 import TextBox from './components/TextBox.js';
 import Modal from './components/Modal.js';
 import Select from './components/Select.js';
-import Option from './components/Option.js';
 import { connect } from 'react-redux';
 import { getEvents, getEventDetailData } from './actions/SampleActions.js';
 
@@ -27,9 +26,19 @@ class App extends Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
-    let details = this.props.text[id];
+    let details = this.props.events[id];
+    if (!details)
+      return;
+    let contract_group_id = details.primary_contract_group_id;
+    let contract_group = this.props.contract_groups[contract_group_id];
+    console.log(contract_group)
+    let contracts = [];
+    _.each(contract_group.contracts, (contract_id) => {
+      contracts.push(this.props.contracts[contract_id]);
+    });
+
     this.setState({
-      displayEventDetails: <DetailModal details={details}/> //Todo: change it to more comprehensive event details
+      displayEventDetails: <DetailModal details={details} contracts={contracts} contract_group={contract_group} />
     });
   }
 
@@ -39,8 +48,8 @@ class App extends Component {
 
   render() {
     let tableContent = [];
-    const {text, eventDetails, onButtonClick, displayModal} = this.props;
-    _.each(text, (value) => {
+    const {events} = this.props;
+    _.each(events, (value) => {
       let eventID = <TableData>{value.id}</TableData>;
       let eventType = <TableData>{value.event_type}</TableData>;
       let eventName = <TableData>{value.name}</TableData>;
@@ -48,6 +57,20 @@ class App extends Component {
 
       tableContent.push(<TableRow key={value.id}>{eventID}{eventType}{eventName}{eventDetail}</TableRow>);
     });
+
+    let options = [
+      {value: "horse-racing", name: "Horse Racing"},
+      {value: "football", name: "Football"},
+      {value: "tennis", name: "Tennis"},
+      {value: "american-football", name: "American Football"},
+      {value: "basketball", name: "Basketball"},
+      {value: "boxing", name: "Boxing"},
+      {value: "cricket", name: "Cricket"},
+      {value: "golf", name: "Golf"},
+      {value: "ice-hockey", name: "Ice Hockey"},
+      {value: "snooker", name: "Snooker"},
+      {value: "volleyball", name: "Volleyball"}
+    ]
 
     return (
       <div className="App">
@@ -58,7 +81,7 @@ class App extends Component {
         <p>if the table is not diplaying, please install Chrome plugin</p>
         <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">allow-control-allow-origin</a>
         <Container>
-          <Button onClick={onButtonClick} name={"Show All Events"} size="L"/>
+          <Select options={options} onChange={this.props.onButtonClick}/>
         </Container>
         <Container>
           <Table>
@@ -84,7 +107,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {  
-  return { text: state.text, eventDetails: state.eventDetails }  
+  return { events: state.events, contract_groups: state.contract_groups, contracts: state.contracts  }  
 }  
  
 const mapDispatchToProps = {  

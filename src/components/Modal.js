@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Button from './Button.js'
 import PropTypes from 'prop-types';
 
-class Modal extends React.Component {
+class Modal extends Component {
   render() {
     // Render nothing if the "show" prop is false
     if(!this.props.show) {
@@ -27,18 +28,16 @@ class Modal extends React.Component {
       minHeight: 300,
       margin: '0 auto',
       padding: 30,
-      display: 'block'
+      display: 'block',
+      overflow: 'auto'
     };
 
     return (
       <div className="backdrop" style={backdropStyle}>
         <div className="modal" style={modalStyle}>
           {this.props.children}
-
           <div className="footer">
-            <button onClick={this.props.onClose}>
-              Close
-            </button>
+            <Button onClick={this.props.onClose} name="Close"/>
           </div>
         </div>
       </div>

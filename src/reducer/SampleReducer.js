@@ -1,8 +1,8 @@
 import _ from 'lodash'
 
 const initialState = {  
-    text: {},
-    events: [],
+    events: {},
+    eventIDs: [],
     eventDetails: ''
 } 
 
@@ -13,8 +13,10 @@ export const reducer = (state = initialState, action) => {
         	let fullData = action.data;
         	let eventIds = fullData.event_ids;
             newState = _.assign({}, initialState, {
-                text: fullData.events,
-                events: eventIds
+                events: fullData.events,
+                eventIDs: eventIds,
+                contract_groups: fullData.contract_groups,
+                contracts: fullData.contracts
             });
             
 		    return newState;
