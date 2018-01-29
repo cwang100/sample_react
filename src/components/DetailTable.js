@@ -9,17 +9,14 @@ import Column from './Column.js';
 
 
 class EventTable extends Component {  
-  handleOnChange = (id) => {
-    this.props.onClick(id);
-  }
-
+  
   render() {
     let tableContent = [];
     _.each(this.props.events, (value) => {
       let eventID = <TableData>{value.id}</TableData>;
       let eventType = <TableData>{value.event_type}</TableData>;
       let eventName = <TableData>{value.name}</TableData>;
-      let eventDetail = <TableData><Button onClick={() => this.handleOnChange(value.id)} name={"View Details"} id={value.id}/></TableData>;
+      let eventDetail = <TableData><Button onClick={() => this.toggleModal(value.id)} name={"View Details"} id={value.id}/></TableData>;
 
       tableContent.push(<TableRow key={value.id}>{eventID}{eventType}{eventName}{eventDetail}</TableRow>);
     });
