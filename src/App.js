@@ -80,13 +80,13 @@ class App extends Component {
       <Section id="container">
         <Header/>
 
-        <SideBar/>
+        <SideBar options={options} onClick={this.props.onButtonClick}/>
     <Section id="main-content">
       <Section className="wrapper">
         <p>if the table is not diplaying, please install Chrome plugin</p>
         <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">allow-control-allow-origin</a>
         <Container>
-          <Select options={options} onChange={this.props.onButtonClick}/>
+          
         </Container>
         <Container>
           <Table>
