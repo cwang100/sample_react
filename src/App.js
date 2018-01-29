@@ -48,6 +48,7 @@ class App extends Component {
     });
   }
 
+  // HAS BUG!! No 'Access-Control-Allow-Origin' header is present on the requested resource.
   componentWillMount() {
     this.props.onButtonClick('horse-racing');
   }
