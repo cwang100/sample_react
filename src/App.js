@@ -9,6 +9,7 @@ import DetailModal from './components/DetailModal.js';
 import ContractsTable from './components/ContractsTable.js';
 import Header from './components/Header.js';
 import Loading from './components/Loading.js';
+import NeedPlugin from './components/NeedPlugin.js';
 import Select from './components/Select.js';
 import SideBar from './components/SideBar.js';
 import Table from './components/Table.js';
@@ -52,6 +53,9 @@ class App extends Component {
   }
 
   render() {
+
+    if (this.props.failure)
+      return <NeedPlugin/>
     let tableContent = [];
     const {events} = this.props;
     _.each(events, (value) => {
@@ -84,8 +88,6 @@ class App extends Component {
         <SideBar options={options} onClick={this.props.onButtonClick}/>
     <Section id="main-content">
       <Section className="wrapper">
-        <p>if the table is not diplaying, please install Chrome plugin</p>
-        <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">allow-control-allow-origin</a>
         <Container>
           
         </Container>
@@ -120,7 +122,8 @@ const mapStateToProps = (state) => {
     events: state.events, 
     contract_groups: state.contract_groups, 
     contracts: state.contracts, 
-    loading:  state.loading
+    loading:  state.loading,
+    failure: state.failed
   }  
 }  
  

@@ -15,7 +15,12 @@ export const reducer = (state = initialState, action) => {
             });
             
             return newState;
-
+        case 'FAILED': 
+            newState = _.assign({}, state, {
+                failed: true
+            });
+            
+            return newState;
         case 'BUTTON_CLICK': 
         	let fullData = action.data;
         	let eventIds = fullData.event_ids;
