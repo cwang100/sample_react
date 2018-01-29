@@ -2,6 +2,7 @@ import $ from "jquery";
 
 export function getEvents (event) {
 	return (dispatch, getState) => {
+        dispatch({type:'LOADING'})
 		return $.ajax({
         url: 'https://smarkets.com/v0/listings/slug/sport/'+ event +'/?period=upcoming',
         method: 'GET'

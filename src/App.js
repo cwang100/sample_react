@@ -8,6 +8,7 @@ import Container from './components/Container.js';
 import DetailModal from './components/DetailModal.js';
 import ContractsTable from './components/ContractsTable.js';
 import Header from './components/Header.js';
+import Loading from './components/Loading.js';
 import Select from './components/Select.js';
 import SideBar from './components/SideBar.js';
 import Table from './components/Table.js';
@@ -106,6 +107,7 @@ class App extends Component {
         >
           {this.state.displayEventDetails}
         </Modal>
+        <Loading loading={this.props.loading}/>
       </Section>
     </Section>
   </Section>
@@ -114,7 +116,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {  
-  return { events: state.events, contract_groups: state.contract_groups, contracts: state.contracts  }  
+  return { 
+    events: state.events, 
+    contract_groups: state.contract_groups, 
+    contracts: state.contracts, 
+    loading:  state.loading
+  }  
 }  
  
 const mapDispatchToProps = {  
