@@ -8,6 +8,8 @@ export function getEvents (event) {
         method: 'GET'
     }).done(data => {
         dispatch({type:'BUTTON_CLICK', data:data})
+    }).fail(xhr => {
+        dispatch({type:'FAILED'})
     })
   }
 }
