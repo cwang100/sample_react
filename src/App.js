@@ -16,19 +16,18 @@ import Table from './components/Table.js';
 import TableData from './components/TableData.js';
 import TableHead from './components/TableHead.js';
 import TableRow from './components/TableRow.js';
+import EventTable from './components/EventTable.js';
 import TextBox from './components/TextBox.js';
-import Modal from './components/Modal.js';
 import { connect } from 'react-redux';
 import { getEvents, getEventDetailData } from './actions/SampleActions.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = { isOpen: false, displayEventDetails: <TextBox/> };
   }
 
-  toggleModal = (id) => {
+  toggleDetail =  (id) => {
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -53,19 +52,10 @@ class App extends Component {
   }
 
   render() {
-
     if (this.props.failure)
       return <NeedPlugin/>
     let tableContent = [];
     const {events} = this.props;
-    _.each(events, (value) => {
-      let eventID = <TableData>{value.id}</TableData>;
-      let eventType = <TableData>{value.event_type}</TableData>;
-      let eventName = <TableData>{value.name}</TableData>;
-      let eventDetail = <TableData><Button onClick={() => this.toggleModal(value.id)} name={"View Details"} id={value.id}/></TableData>;
-
-      tableContent.push(<TableRow key={value.id}>{eventID}{eventType}{eventName}{eventDetail}</TableRow>);
-    });
 
     let options = [
       {value: "horse-racing", name: "Horse Racing"},
@@ -89,27 +79,17 @@ class App extends Component {
     <Section id="main-content">
       <Section className="wrapper">
         <Container>
-          
-        </Container>
-        <Container>
-          <Table>
-            <TableRow>
-              <TableHead>Event ID</TableHead>
-              <TableHead>Event Type</TableHead>
-              <TableHead>Event Name</TableHead>
-              <TableHead></TableHead>
-            </TableRow>
-            {tableContent}
-          </Table>
+        {
+          this.state.isOpen ? (
+            this.state.displayEventDetails
+          ) : (
+            <EventTable events={events} onClick={this.toggleDetail}/>
+          )
+        }
         </Container>
 
-        <Modal 
-          show={this.state.isOpen}
-          onClose={this.toggleModal}
-        >
-          {this.state.displayEventDetails}
-        </Modal>
         <Loading loading={this.props.loading}/>
+
       </Section>
     </Section>
   </Section>
