@@ -6,6 +6,7 @@ import Button from './components/Button.js';
 import Section from './components/Section.js';
 import Container from './components/Container.js';
 import DetailModal from './components/DetailModal.js';
+import ContractsTable from './components/ContractsTable.js';
 import Header from './components/Header.js';
 import Select from './components/Select.js';
 import SideBar from './components/SideBar.js';
