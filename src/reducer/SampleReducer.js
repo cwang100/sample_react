@@ -26,7 +26,12 @@ export const reducer = (state = initialState, action) => {
                 eventDetails: action.data
             });
         	return newState;
-            
+        
+        case 'POPULAR_EVENTS':
+            newState = _.assign({}, initialState, {
+                popular: action.data
+            });
+            return newState;
         default:  
             return newState;  
     }  

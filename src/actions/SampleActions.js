@@ -22,3 +22,14 @@ export function getEventDetailData (eventID) {
     })
   }
 }
+
+export function getPopularEvents () {
+    return (dispatch, getState) => {
+        return $.ajax({
+        url: 'https://fe-api.smarkets.com/v0/events/popular/',
+        method: 'GET'
+    }).done(data => {
+        dispatch({type:'POPULAR_EVENTS', data:data})
+    })
+  }
+}
