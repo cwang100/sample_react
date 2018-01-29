@@ -15,7 +15,8 @@ import SideBar from './components/SideBar.js';
 import Table from './components/Table.js';
 import TableData from './components/TableData.js';
 import TableHead from './components/TableHead.js';
-import TableRow from './components/TableRow.js';
+import TableRow from './components/EventTable.js';
+import EventTable from './components/TableRow.js';
 import TextBox from './components/TextBox.js';
 import Modal from './components/Modal.js';
 import { connect } from 'react-redux';
@@ -93,15 +94,7 @@ class App extends Component {
           
         </Container>
         <Container>
-          <Table>
-            <TableRow>
-              <TableHead>Event ID</TableHead>
-              <TableHead>Event Type</TableHead>
-              <TableHead>Event Name</TableHead>
-              <TableHead></TableHead>
-            </TableRow>
-            {tableContent}
-          </Table>
+<EventTable events={events}> </EventTable>
         </Container>
 
         <Modal 
