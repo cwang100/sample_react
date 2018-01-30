@@ -4,7 +4,6 @@ import Table from './Table.js';
 import TableHead from './TableHead.js';
 import TableData from './TableData.js';
 import TableRow from './TableRow.js';
-import TextBox from './TextBox.js';
 
 class ContractsTable extends React.Component {
 	buildContracts = () => {
@@ -24,17 +23,15 @@ class ContractsTable extends React.Component {
 			contractTable.push(contractRow);
 		});
 
-		if (contractTable.length == 0)
-    	contractTable = "No Contract";
 		return contractTable;
 	}
 
   render() {
 		if (!this.props.contracts)
-	      return <Table/>
+	      return <Table><TableRow><TableData>No Contract</TableData></TableRow></Table>
 	  let contract = this.props.contracts[0];
 	  if (!contract)
-	  	return <Table/>
+	  	return <Table><TableRow><TableData>No Contract</TableData></TableRow></Table>
 	  let cloth, jockey, trainer, silk;
 	  if(contract.cloth_number)
 			cloth = <TableHead>Cloth Number</TableHead>;
