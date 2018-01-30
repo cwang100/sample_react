@@ -1,28 +1,13 @@
-import _ from 'lodash';
 import React from 'react';
 import Table from './Table.js';
 import TableData from './TableData.js';
 import TableRow from './TableRow.js';
 import TextBox from './TextBox.js';
+import ContractsTable from './ContractsTable';
 
 class DetailedModal extends React.Component {
 	buildContracts = () => {
-		let contractTable = [];
-		_.each(this.props.contracts, (contract) => {
-			contractTable.push(<TableRow><TableData>Name: </TableData><TableData>{contract.name}</TableData></TableRow>);
-			if(contract.cloth_number)
-				contractTable.push(<TableRow><TableData>Cloth Number: </TableData><TableData>{String(contract.cloth_number)}</TableData></TableRow>);
-			if(contract.jockey)
-				contractTable.push(<TableRow><TableData>Jockey: </TableData><TableData>{contract.jockey}</TableData></TableRow>);
-			if(contract.trainer)
-				contractTable.push(<TableRow><TableData>Trainer: </TableData><TableData>{contract.trainer}</TableData></TableRow>);
-			if(contract.silk)
-				contractTable.push(<TableRow><TableData>Silk: </TableData><TableData><img src={contract.silk} alt="no img"/></TableData></TableRow>);
-		});
-
-		if (contractTable.length == 0)
-    	contractTable = "No Contract";
-		return <TextBox><p>Contracts</p><Table>{contractTable}</Table></TextBox>
+		return <TextBox>Contracts:<ContractsTable contracts={this.props.contracts}/></TextBox>
 	}
 
   render() {

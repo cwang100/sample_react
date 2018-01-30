@@ -5,7 +5,6 @@ import TableData from './TableData.js';
 import TableHead from './TableHead.js';
 import TableRow from './TableRow.js';
 import Button from './Button.js';
-import Column from './Column.js';
 
 
 class EventTable extends Component {  

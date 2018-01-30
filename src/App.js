@@ -1,25 +1,18 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Button from './components/Button.js';
 import Section from './components/Section.js';
 import Container from './components/Container.js';
 import DetailModal from './components/DetailModal.js';
-import ContractsTable from './components/ContractsTable.js';
 import Header from './components/Header.js';
 import Loading from './components/Loading.js';
 import NeedPlugin from './components/NeedPlugin.js';
-import Select from './components/Select.js';
 import SideBar from './components/SideBar.js';
-import Table from './components/Table.js';
-import TableData from './components/TableData.js';
-import TableHead from './components/TableHead.js';
-import TableRow from './components/TableRow.js';
 import EventTable from './components/EventTable.js';
 import TextBox from './components/TextBox.js';
 import { connect } from 'react-redux';
-import { getEvents, getEventDetailData } from './actions/SampleActions.js';
+import { getEvents, getEventDetailData, getPopularEvents } from './actions/SampleActions.js';
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +29,7 @@ class App extends Component {
       return;
     let contract_group_id = details.primary_contract_group_id;
     let contract_group = this.props.contract_groups[contract_group_id];
-    console.log(contract_group)
+    
     let contracts = [];
     _.each(contract_group.contracts, (contract_id) => {
       contracts.push(this.props.contracts[contract_id]);
@@ -51,10 +44,16 @@ class App extends Component {
     this.props.onButtonClick('horse-racing');
   }
 
+  handleClick = (e) => {
+    this.props.onButtonClick(e);
+    this.setState({
+      isOpen: false
+    });
+  }
+
   render() {
     if (this.props.failure)
       return <NeedPlugin/>
-    let tableContent = [];
     const {events} = this.props;
 
     let options = [
@@ -74,8 +73,7 @@ class App extends Component {
     return (
       <Section id="container">
         <Header/>
-
-        <SideBar options={ options } onClick={ this.props.onButtonClick }/>
+        <SideBar options={ options } onClick={ this.handleClick }/>
     <Section id="main-content">
       <Section className="wrapper">
         <Container>
