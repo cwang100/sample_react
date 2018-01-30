@@ -75,20 +75,23 @@ class App extends Component {
       <Section id="container">
         <Header/>
 
-        <SideBar options={options} onClick={this.props.onButtonClick}/>
+        <SideBar options={ options } onClick={ this.props.onButtonClick }/>
     <Section id="main-content">
       <Section className="wrapper">
         <Container>
         {
           this.state.isOpen ? (
-            this.state.displayEventDetails
+            <div>
+              { this.state.displayEventDetails }
+              <Button onClick={ this.toggleDetail } name="Back to event list"/>
+            </div>
           ) : (
-            <EventTable events={events} onClick={this.toggleDetail}/>
+            <EventTable events={ events } onClick={ this.toggleDetail }/>
           )
         }
         </Container>
 
-        <Loading loading={this.props.loading}/>
+        <Loading loading={ this.props.loading }/>
 
       </Section>
     </Section>
