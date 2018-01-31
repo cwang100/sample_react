@@ -3,7 +3,8 @@ import _ from 'lodash'
 const initialState = {  
     events: {},
     eventIDs: [],
-    eventDetails: ''
+    eventDetails: '',
+    popularEvents: {}
 } 
 
 export const reducer = (state = initialState, action) => {
@@ -43,7 +44,7 @@ export const reducer = (state = initialState, action) => {
         
         case 'POPULAR_EVENTS':
             newState = _.assign({}, state, {
-                popular: action.data,
+                popular: action.data.results,
                 loading: false
             });
             return newState;
