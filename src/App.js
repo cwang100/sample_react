@@ -10,6 +10,7 @@ import Loading from './components/Loading.js';
 import NeedPlugin from './components/NeedPlugin.js';
 import SideBar from './components/SideBar.js';
 import EventTable from './components/EventTable.js';
+import PopularTable from './components/PopularTable.js';
 import TextBox from './components/TextBox.js';
 import { connect } from 'react-redux';
 import { getEvents, getEventDetailData, getPopularEvents } from './actions/SampleActions.js';
@@ -17,7 +18,7 @@ import { getEvents, getEventDetailData, getPopularEvents } from './actions/Sampl
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false, displayEventDetails: <TextBox/> };
+    this.state = { isOpen: false, showPopular: true, displayEventDetails: <TextBox/> };
   }
 
   toggleDetail =  (id) => {
@@ -41,13 +42,14 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.props.onButtonClick('horse-racing');
+    this.props.onLoadPage();
   }
 
   handleClick = (e) => {
     this.props.onButtonClick(e);
     this.setState({
-      isOpen: false
+      isOpen: false,
+      showPopular: false
     });
   }
 
@@ -55,6 +57,7 @@ class App extends Component {
     if (this.props.failure)
       return <NeedPlugin/>
     const {events} = this.props;
+    const {popular} = this.props;
 
     let options = [
       {value: "horse-racing", name: "Horse Racing"},
@@ -80,11 +83,15 @@ class App extends Component {
         {
           this.state.isOpen ? (
             <div>
-              { this.state.displayEventDetails }
+              this.state.displayEventDetails
               <Button onClick={ this.toggleDetail } name="Back to event list"/>
             </div>
-          ) : (
-            <EventTable events={ events } onClick={ this.toggleDetail }/>
+          ): (
+            this.state.showPopular ? (
+              <PopularTable events={ popular } onClick={ this.toggleDetail }/>
+            ) : (
+              <EventTable events={ events } onClick={ this.toggleDetail }/>
+            )
           )
         }
         </Container>
@@ -101,6 +108,7 @@ class App extends Component {
 const mapStateToProps = (state) => {  
   return { 
     events: state.events, 
+    popular: state.popular,
     contract_groups: state.contract_groups, 
     contracts: state.contracts, 
     loading:  state.loading,
@@ -110,7 +118,8 @@ const mapStateToProps = (state) => {
  
 const mapDispatchToProps = {  
   onButtonClick: getEvents,
-  displayModal: getEventDetailData
+  displayModal: getEventDetailData,
+  onLoadPage: getPopularEvents
 }  
 
 let ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App) 
