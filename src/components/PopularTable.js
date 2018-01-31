@@ -9,7 +9,7 @@ import Button from './Button.js';
 
 class PopularTable extends Component {  
   handleOnChange = (id) => {
-    this.props.onClick(id);
+    window.open("https://www.smarkets.com/event/" + id);
   }
 
   render() {

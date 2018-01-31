@@ -83,12 +83,12 @@ class App extends Component {
         {
           this.state.isOpen ? (
             <div>
-              this.state.displayEventDetails
+              { this.state.displayEventDetails }
               <Button onClick={ this.toggleDetail } name="Back to event list"/>
             </div>
           ): (
             this.state.showPopular ? (
-              <PopularTable events={ popular } onClick={ this.toggleDetail }/>
+              <PopularTable events={ popular }/>
             ) : (
               <EventTable events={ events } onClick={ this.toggleDetail }/>
             )
