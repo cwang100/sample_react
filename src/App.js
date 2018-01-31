@@ -81,19 +81,17 @@ class App extends Component {
       <Section className="wrapper">
         <Container>
         {
-        this.state.showPopular ? (
-          <PopularTable events={ popular } onClick={ this.toggleDetail }/>
-          ) : (
-
-              this.state.isOpen ? (
-                <div>
-                   this.state.displayEventDetails 
-                  <Button onClick={ this.toggleDetail } name="Back to event list"/>
-                </div>
-              ) : (
-                <EventTable events={ events } onClick={ this.toggleDetail }/>
-              )
-            
+          this.state.isOpen ? (
+            <div>
+              this.state.displayEventDetails
+              <Button onClick={ this.toggleDetail } name="Back to event list"/>
+            </div>
+          ): (
+            this.state.showPopular ? (
+              <PopularTable events={ popular } onClick={ this.toggleDetail }/>
+            ) : (
+              <EventTable events={ events } onClick={ this.toggleDetail }/>
+            )
           )
         }
         </Container>
